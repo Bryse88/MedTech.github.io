@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disability Rehabilitation</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --primary-light: #4d94ff;
+            --white: #ffffff;
+            --light-blue: #e6f2ff;
+            --dark-blue: #004080;
+            --gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .active {
+            color: var(--primary);
+        }
+        
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5rem 10%;
+        }
+        
+        #home {
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-blue) 100%);
+            padding-top: 6rem;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 800px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark-blue);
+            line-height: 1.2;
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #555;
+            max-width: 600px;
+        }
+        
+        .hero-content .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 102, 204, 0.3);
+        }
+        
+        .hero-content .btn:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-3px);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator span {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: #777;
+        }
+        
+        .scroll-indicator .arrow {
+            width: 20px;
+            height: 20px;
+            border-right: 3px solid var(--primary);
+            border-bottom: 3px solid var(--primary);
+            transform: rotate(45deg);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+        
+        #vision {
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .vision-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .vision-text {
+            flex: 1;
+        }
+        
+        .vision-text h2 {
+            font-size: 1.8rem;
+            color: var(--dark-blue);
+            margin-bottom: 1.5rem;
+        }
+        
+        .vision-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .vision-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vision-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .features {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--gray);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        #contact {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+        }
+        
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        .contact-details div {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-details h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 102, 204, 0.3);
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-3px);
+        }
+        
+        #status-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .vision-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                font-size: 1.5rem;
+                background: none;
+                border: none;
+                color: var(--primary);
+                cursor: pointer;
+            }
+            
+            nav.mobile-active ul {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                flex-direction: column;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 1rem 0;
+            }
+            
+            nav.mobile-active ul li {
+                margin: 0.5rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#home" class="logo">Disability Rehabilitation</a>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#vision">Our Vision</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <div class="hero-content">
+            <h1>Empowering Through Movement</h1>
+            <p>Innovative solutions designed to help partially able individuals exercise effectively and regain mobility in their daily lives.</p>
+            <a href="#vision" class="btn">Discover Our Vision</a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
+    
+    <section id="vision">
+        <h2 class="section-title">Our Vision</h2>
+        <div class="vision-content">
+            <div class="vision-text">
+                <h2>Device to help partially able individuals to exercise</h2>
+                <p>At Disability Rehabilitation, we're committed to developing innovative solutions that empower individuals with partial mobility to maintain active lifestyles and improve their quality of life.</p>
+                <h2>Exercise your limbs in supine, sitting and standing position</h2>
+                <p>Our revolutionary device is designed to accommodate various body positions, allowing users to exercise effectively regardless of their mobility limitations.</p>
+            </div>
+            <div class="vision-image">
+                <img src="images/device-placeholder.jpg" alt="Rehabilitation device concept">
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>Supine Position</h3>
+                <p>Exercise comfortably while lying down, reducing strain on the back and providing support for users with limited trunk control.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Sitting Position</h3>
+                <p>Engage in effective workouts from a seated position, perfect for wheelchair users or those who find standing difficult.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Standing Position</h3>
+                <p>Gradually build strength and stability with supported standing exercises designed for progressive rehabilitation.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p>We'd love to hear from you! Whether you have questions about our device, want to learn more about our mission, or are interested in partnering with us, please don't hesitate to reach out.</p>
+                
+                <div class="contact-details">
+                    <div>
+                        <h3>Our Address</h3>
+                        <p>123 Health Innovation Drive<br>
+                        Medical District<br>
+                        Anytown, AN 12345</p>
+                    </div>
+                    
+                    <div>
+                        <h3>Phone</h3>
+                        <p>(555) 123-4567</p>
+                    </div>
+                    
+                    <div>
+                        <h3>Email</h3>
+                        <p>info@disabilityrehab.org</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <!-- FormSpree Form - Replace YOUR_FORM_ID with your actual FormSpree form ID -->
+                <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="_replyto" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <!-- Hidden subject field -->
+                    <input type="hidden" name="_subject" value="New message from Disability Rehabilitation website">
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                
+                <div id="status-message"></div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; <span id="current-year"></span> Disability Rehabilitation. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Active link highlighting based on scroll position
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul li a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mainNav = document.getElementById('main-nav');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('mobile-active');
+            });
+        }
+        
+        // Form submission handling
+        const contactForm = document.getElementById('contactForm');
+        const statusMessage = document.getElementById('status-message');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                // FormSpree will handle the form submission
+                // This code just shows a success message before redirecting
+                
+                // If you're testing locally without FormSpree, you can prevent the default submission
+                // e.preventDefault();
+                
+                // Show sending status
+                statusMessage.textContent = 'Sending your message...';
+                statusMessage.className = 'info';
+                statusMessage.style.display = 'block';
+                
+                // FormSpree will handle the actual submission and redirect
+            });
+        }
+    </script>
+</body>
+</html>
